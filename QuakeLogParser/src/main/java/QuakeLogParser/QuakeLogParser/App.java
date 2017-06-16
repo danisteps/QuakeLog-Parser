@@ -1,13 +1,19 @@
 package QuakeLogParser.QuakeLogParser;
+import java.text.ParseException;
+import Business.LogParser;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	LogParser parser = new LogParser();
+        try 
+        {
+			parser.Parse("/Users/danielesoarespassos/Documents/eclipse_workspace/QuakeLog/src/Console/game.txt");
+		} 
+        catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
