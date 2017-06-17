@@ -59,7 +59,9 @@ public class AppController
 	 */
 	public String getAllMatchesInJSON(){
 		
-		String jsonInString = "";
+		String jsonInString = "Nenhuma partida foi importada.";
+		
+		//Recuepra as partidas
 		GamePresentation presentation = getAllMatches();
 		
 		List<MatchSummary> presentMatches = presentation.getMatches();
@@ -68,11 +70,12 @@ public class AppController
     	try 
     	{
     		//Converte para json
-			jsonInString = mapper.writeValueAsString(presentation.getMatches());
+    		if (presentMatches != null && presentMatches.size() > 1)
+    			jsonInString = mapper.writeValueAsString(presentMatches);
 		} 
-    	catch (JsonProcessingException e) 
+    	catch (JsonProcessingException e)
     	{
-			System.out.println("Erro");
+			System.out.println("Erro!");
 		}
 		
 		return jsonInString;

@@ -30,7 +30,7 @@ public class App
     		System.out.println("2 - Listar todas as partidas");
     		System.out.println("3 - Listar ranking de jogadores");
     		System.out.println("4 - Sair");
-    		System.out.println("Digite o número da opração.");
+    		System.out.println("Digite o número da operação.");
     		
     		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     		
@@ -79,17 +79,8 @@ public class App
     }
     
     private void ListMatches(){
-    	GamePresentation presentation = controller.getAllMatches();
-    	List<MatchSummary> matches = presentation.getMatches();
-    	ObjectMapper mapper = new ObjectMapper();
-    	
-    	//Object to JSON in String
-    	try {
-			String jsonInString = mapper.writeValueAsString(matches);
-			System.out.print(jsonInString);
-		} catch (JsonProcessingException e) {
-			System.out.println("Erro");
-		}
+    	String matches = controller.getAllMatchesInJSON();
+    	System.out.print(matches);
     }
     
     private void ListRanking(){

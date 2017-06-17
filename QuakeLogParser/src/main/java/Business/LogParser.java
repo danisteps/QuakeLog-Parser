@@ -4,9 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +12,12 @@ import java.util.regex.Pattern;
 import Data.PlayerMatch;
 
 public class LogParser {
+	
 	private static String worldTag = "<world>";
+	private static String initGameTag = "InitGame";
+	private static String clientUserinfoChangedTag = "ClientUserinfoChanged";
+	private static String killTag = "Kill";
+	private static String shutdownGameTag = "ShutdownGame";
 	
 	public List<PlayerMatch> Parse(String filePath) throws ParseException{
 		
@@ -22,7 +25,7 @@ public class LogParser {
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filePath))) 
 		{
-			//Leitura
+			//Leitura e interpretação do log
 		    String line = br.readLine();
 		    PlayerMatch currentMatch = null;
 		    
@@ -32,7 +35,9 @@ public class LogParser {
 		    	String[] splited = leftRemoved.split(" ");
 		    	
 		    	if (splited.length > 1){
-		    		if (splited[1].startsWith("InitGame")){
+		    		
+		    		//Começa um novo jogo
+		    		if (splited[1].startsWith(initGameTag)){
 		    			currentMatch = new PlayerMatch(splited[0]);
 		    			
 		    			line = br.readLine();
@@ -41,7 +46,8 @@ public class LogParser {
 		    				leftRemoved = line.replaceAll("^\\s+", "");
 		    		    	splited = leftRemoved.split(" ");
 		    		    	
-				    		if (splited[1].startsWith("ClientUserinfoChanged")){
+		    		    	//Caso em que se adiciona um novo jogador
+				    		if (splited[1].startsWith(clientUserinfoChangedTag)){
 				    			
 				    			String pattern = "(\\d+:\\d+ ClientUserinfoChanged: \\d+ n\\\\)([\\w ]+)(\\\\t)";
 				    			Pattern regex = Pattern.compile(pattern);
@@ -49,29 +55,27 @@ public class LogParser {
 				    			
 				    			if (m.find( ))
 				    				currentMatch.addPlayer(m.group(2));
-				    			
-				    			//String[] playerInfo = splited[3].split("\\\\");
-				    			//currentMatch.addPlayer(playerInfo[1]);
 				    		}
-				    		else if (splited[1].startsWith("Kill")){
+				    		//Caso em que jogadores morrem
+				    		else if (splited[1].startsWith(killTag)){
 				    			
 				    			String pattern = "(Kill: \\d+ \\d+ \\d+:) (.*) (killed) (.*) (by) (.*)";
 				    			Pattern regex = Pattern.compile(pattern);
 				    			Matcher m = regex.matcher(line);
 				    			
 				    			if (m.find( )){
-					    			String killer = m.group(2); //splited[5];
-					    			String mean = m.group(6);//splited[9];
+					    			String killer = m.group(2);
+					    			String mean = m.group(6);
+					    			String deadPlayer = m.group(4);
 					    			
-					    			if (killer.equals(worldTag)){
-					    				String deadPlayer = m.group(4);//splited[7];
+					    			if (killer.equals(worldTag) || killer.equals(deadPlayer))
 					    				currentMatch.addDeath(deadPlayer, mean);
-					    			}
 					    			else
 					    				currentMatch.addKill(killer, mean);  
 				    			}
 				    		}
-				    		else if (splited[1].startsWith("ShutdownGame") || splited[1].contains("---")){
+				    		//Caso que o jogo acaba
+				    		else if (splited[1].startsWith(shutdownGameTag) || splited[1].contains("---")){
 				    			currentMatch.getMatchInformation().setEndTime(splited[0]);
 				    			matches.add(currentMatch);
 				    			break;
@@ -84,18 +88,12 @@ public class LogParser {
 		    	
 		        line = br.readLine();
 		    }
-		    //String everything = sb.toString();
 		   	    
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//catch(Exception e){
-			//System.out.println(e.getMessage());
-		//}
 		
 		return matches;
 	}
