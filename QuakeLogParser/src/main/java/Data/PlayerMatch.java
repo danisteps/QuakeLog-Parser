@@ -39,6 +39,10 @@ public class PlayerMatch {
 		return this.playerInformation.get(player);
 	}
 	
+	public List<Player> getPlayers(){
+		return players;
+	}
+	
 	public void addKill(String killer, String mean){
 		Player player = new Player(killer);
 		playerInformation.get(player).addKill(mean);
