@@ -1,5 +1,0 @@
-
-In order to run the web page (index.html) properly, you'll need a local server or simply configure the following steps:
-1. Open terminal (command line) and go to the index project folder
-2. Run the command: python -m SimpleHTTPServer
-3. Open the index through: http://localhost:8000
