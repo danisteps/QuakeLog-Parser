@@ -75,7 +75,7 @@ public class LogParser {
 				    			}
 				    		}
 				    		//Caso que o jogo acaba
-				    		else if (splited[1].startsWith(shutdownGameTag) || splited[1].contains("---")){
+				    		else if (splited[1].startsWith(shutdownGameTag) || line.contains("-----")){
 				    			currentMatch.getMatchInformation().setEndTime(splited[0]);
 				    			matches.add(currentMatch);
 				    			break;
