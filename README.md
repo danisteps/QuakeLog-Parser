@@ -15,7 +15,7 @@
 >2. Run the command: python -m SimpleHTTPServer
 >3. Open the index through: http://localhost:8000
 
-### How do I run the parser? ###
+### How do I run the console parser? ###
 
 * Run the main class (Main.java) or open the jar file.
 * The console will display the options available to execute. The options are:
@@ -23,6 +23,11 @@
 >2. Listar todas as partidas: this option displays all imported matches along with its informations
 >3. Listar ranking de jogadores: this option displays the players ranking when a log is imported
 >4. Sair: this options closes the application
+
+### How do I run the web ranking page? ###
+
+* In order to display the ranking information you have to first import a log file on the console
+* After the log is imported, you can open the index.html
 
 ### Technologies used ###
 
