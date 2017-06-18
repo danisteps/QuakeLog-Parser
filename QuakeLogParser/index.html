@@ -1,0 +1,38 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<title>Quake Raking</title>
+<font size="5" color="blue">Quake Raking<br /><br /></font>
+</head>
+<body>
+</body>
+
+<script>
+
+var json = (function() {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "output.json",
+            'dataType': "json",
+            'success': function (data) {
+                json = data;
+            }
+        });
+        return json;
+    })();
+
+var out = '';
+console.log(json);
+var count = 1;
+
+for(var i in json) {
+	out += "#" + count + " - " + i + " - " + json[i] + " kills<br />";
+    count++;
+}
+
+$('body').append(out);
+
+</script>
+</html>
