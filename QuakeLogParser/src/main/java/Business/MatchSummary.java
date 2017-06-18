@@ -25,19 +25,21 @@ public class MatchSummary {
 			//Recupera os jogadores da partida
 			List<Player> playersList = match.getPlayers();
 			
-			//Dada uma partida, preenche as informações necessárias
-			for (Player temp : playersList) {
-				players.add(temp.getName());
-				
-				//Recupera as mortes do jogador
-				Kill playerKill = match.getPlayerKill(temp.getName());
-				
-				//Adiciona um novo sumário de mortes para o jogador
-				KillSumary killSummary = new KillSumary(temp.getName(), playerKill.getKillsAndConsiderDeaths());
-				kills.add(killSummary);
-				
-				//Atualiza o número total de mortes na partida
-				this.total_kills += playerKill.getTotalKills();
+			if (playersList != null){
+				//Dada uma partida, preenche as informações necessárias
+				for (Player temp : playersList) {
+					players.add(temp.getName());
+					
+					//Recupera as mortes do jogador
+					Kill playerKill = match.getPlayerKill(temp.getName());
+					
+					//Adiciona um novo sumário de mortes para o jogador
+					KillSumary killSummary = new KillSumary(temp.getName(), playerKill.getKillsAndConsiderDeaths());
+					kills.add(killSummary);
+					
+					//Atualiza o número total de mortes na partida
+					this.total_kills += playerKill.getTotalKills();
+				}
 			}
 		}
 	}

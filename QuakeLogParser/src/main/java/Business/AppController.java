@@ -1,6 +1,8 @@
 package Business;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +19,11 @@ import Data.RespositoryType;
 public class AppController 
 {
 	private IRespository repository;
+	private IOutputPersister persister;
 	
 	public AppController(){
 		this.repository = RespositoryFactory.createPlayerMatchRepository(RespositoryType.Cache);
+		this.persister = new FilePersister();
 	}
 	
 	/*
@@ -116,9 +120,11 @@ public class AppController
 		
 		try 
     	{
-    		//Converte para json
-    		if (ranking != null && ranking.size() > 1)
+			//Converte para json
+    		if (ranking != null && ranking.size() > 1){
     			jsonInString = mapper.writeValueAsString(ranking);
+    			this.persister.save(jsonInString);
+    		}
 		} 
     	catch (JsonProcessingException e)
     	{
