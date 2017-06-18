@@ -57,6 +57,9 @@ public class AppController
 	        	
 	        	//Salva no repositório
 	        	repository.add(matches);
+	        	
+	        	//Atualiza o ranking da página web
+	        	getAndSaveRankingInJSON();
 			} 
 	        catch (ParseException e) {
 	        	error = "Houve um problema de leitura do arquivo.";
@@ -121,7 +124,7 @@ public class AppController
 		return present;	
 	}
 	
-	public String getRankingInJSON(){
+	public String getAndSaveRankingInJSON(){
 		
 		String jsonInString = "Nenhum jogador foi cadastrado.";
 		

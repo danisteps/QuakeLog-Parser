@@ -85,7 +85,7 @@ public class App
     }
     
     private void ListRanking(){
-    	String ranking = controller.getRankingInJSON();
+    	String ranking = controller.getAndSaveRankingInJSON();
     	System.out.println(ranking);
     }
 }
