@@ -73,7 +73,7 @@ public class App
     		filePath = br.readLine();
     	}
     	
-    	String error = controller.TryImportLog(filePath);
+    	String error = controller.TryImportLog("/Users/danielesoarespassos/Documents/eclipse_workspace/QuakeLog/src/Console/game.txt");
     	
     	if (error != null)
     		System.out.println("Erro: " + error);

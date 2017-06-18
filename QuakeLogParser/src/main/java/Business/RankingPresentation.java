@@ -32,7 +32,7 @@ public class RankingPresentation {
 				Map<Player, Kill> playerInformation = match.getPlayerInformation();
 				for(Map.Entry<Player,Kill> entry : playerInformation.entrySet())
 				{
-					Integer previousCount = players.get(entry.getKey());
+					Integer previousCount = players.get(entry.getKey().getName());
 					
 					if (previousCount == null)
 						previousCount = 0;
