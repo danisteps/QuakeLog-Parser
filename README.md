@@ -19,14 +19,10 @@
 
 * Run the main class (Main.java) or open the jar file.
 * The console will display the options available to execute. The options are:
->1. Importar log de jogo
->   When this option is selected, the user will have to enter the log file path.
->2. Listar todas as partidas
->   This option displays all imported matches along with its informations
->3. Listar ranking de jogadores
->   This option displays the players ranking when a log is imported
->4. Sair
->   This options closes the application
+>1. Importar log de jogo: when this option is selected, the user will have to enter the log file path.
+>2. Listar todas as partidas: this option displays all imported matches along with its informations
+>3. Listar ranking de jogadores: this option displays the players ranking when a log is imported
+>4. Sair: this options closes the application
 
 ### Technologies used ###
 
