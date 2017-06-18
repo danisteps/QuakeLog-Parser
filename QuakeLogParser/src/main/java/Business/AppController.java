@@ -1,6 +1,7 @@
 package Business;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +73,40 @@ public class AppController
     		//Converte para json
     		if (presentMatches != null && presentMatches.size() > 1)
     			jsonInString = mapper.writeValueAsString(presentMatches);
+		} 
+    	catch (JsonProcessingException e)
+    	{
+			System.out.println("Erro!");
+		}
+		
+		return jsonInString;
+	}
+	
+	public RankingPresentation getPlayerRaking()
+	{
+		//Recupera todas as partidas
+		List<PlayerMatch> matches = repository.getAll();
+		
+		RankingPresentation present = new RankingPresentation();
+		present.build(matches);
+		
+		return present;	
+	}
+	
+	public String getRankingInJSON(){
+		
+		String jsonInString = "Nenhum jogador foi cadastrado.";
+		
+		RankingPresentation present = getPlayerRaking();		
+		Map <String, Integer> ranking = present.getSortedPlayers();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try 
+    	{
+    		//Converte para json
+    		if (ranking != null && ranking.size() > 1)
+    			jsonInString = mapper.writeValueAsString(ranking);
 		} 
     	catch (JsonProcessingException e)
     	{

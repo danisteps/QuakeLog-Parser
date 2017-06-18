@@ -2,14 +2,8 @@ package QuakeLogParser.QuakeLogParser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Business.AppController;
-import Business.GamePresentation;
-import Business.MatchSummary;
 
 public class App 
 {
@@ -84,6 +78,7 @@ public class App
     }
     
     private void ListRanking(){
-    	
+    	String ranking = controller.getRankingInJSON();
+    	System.out.print(ranking);
     }
 }

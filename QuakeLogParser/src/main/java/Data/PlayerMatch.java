@@ -2,7 +2,6 @@ package Data;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PlayerMatch {
@@ -30,6 +29,14 @@ public class PlayerMatch {
 		}
 	}
 	
+	public Map<Player, Kill> getPlayerInformation() {
+		return playerInformation;
+	}
+
+	public void setPlayerInformation(Map<Player, Kill> playerInformation) {
+		this.playerInformation = playerInformation;
+	}
+
 	public Match getMatchInformation(){
 		return this.matchInformation;
 	}
