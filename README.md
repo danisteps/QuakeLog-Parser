@@ -26,9 +26,14 @@
 ### How do I run the web ranking page? ###
 
 * In order to display the ranking information you have to first import a log file on the console
+* The console will outputs a file (output.json) that contains the ranking information when a log is imported.
 * After the log is imported, you can open the index.html
 
 ### Technologies used ###
 
 * The console was developed using Java
 * The web page was developed using HTML and JQuery
+
+### Considerations ###
+
+* It was assumed that if a player kills himself he loses 1 kill form his count;
