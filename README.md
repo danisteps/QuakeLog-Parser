@@ -9,15 +9,9 @@
 
 ### How do I get set up? ###
 
-* The application contains a console to import and output log information and a web page that displays the players ranking.
+* To run the console you can either run the jar file or open the project using Eclipse or another IDE for Java.
 
-### Contribution guidelines ###
+### Technologies used ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* The console was developed using Java
+* The web page was developed using HTML and JQuery
