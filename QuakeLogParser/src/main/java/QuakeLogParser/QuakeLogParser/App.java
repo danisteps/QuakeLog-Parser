@@ -69,7 +69,10 @@ public class App
     	
     	String filePath = br.readLine();
     	
-    	controller.ImportLog("/Users/danielesoarespassos/Documents/eclipse_workspace/QuakeLog/src/Console/game.txt");
+    	String error = controller.TryImportLog("/Users/danielesoarespassos/Documents/eclipse_workspace/QuakeLog/src/Console/game.txt");
+    	
+    	if (error != null)
+    		System.out.print("Erro: " + error);
     }
     
     private void ListMatches(){

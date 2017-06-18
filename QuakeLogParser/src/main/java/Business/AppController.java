@@ -1,4 +1,6 @@
 package Business;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -23,21 +25,31 @@ public class AppController
 	/*
 	 * Importa as informações de um arquivo de log
 	 */
-	public void ImportLog(String filePath){
+	public String TryImportLog(String filePath){
 		
-		LogParser parser = new LogParser();
+		String error = null;
+		FileValidator validator = new FileValidator();
+		BufferedReader reader = validator.validateAndOpen(filePath);
 		
-        try 
-        {
-        	//Converte para o tipo conhecido
-        	List<PlayerMatch> matches = parser.Parse(filePath);
-        	
-        	//Salva no repositório
-        	repository.add(matches);
-		} 
-        catch (ParseException e) {
-			e.printStackTrace();
+		if (reader != null){
+			LogParser parser = new LogParser();
+			
+	        try 
+	        {
+	        	//Converte para o tipo conhecido
+	        	List<PlayerMatch> matches = parser.Parse(filePath, reader);
+	        	
+	        	//Salva no repositório
+	        	repository.add(matches);
+			} 
+	        catch (ParseException e) {
+	        	error = "Houve um problema de leitura do arquivo.";
+			}
 		}
+		else
+			error = validator.getError();
+        
+        return error;
 	}
 	
 	/*

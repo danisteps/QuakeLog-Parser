@@ -1,7 +1,5 @@
 package Business;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -19,14 +17,16 @@ public class LogParser {
 	private static String killTag = "Kill";
 	private static String shutdownGameTag = "ShutdownGame";
 	
-	public List<PlayerMatch> Parse(String filePath) throws ParseException{
+	public List<PlayerMatch> Parse(String filePath, BufferedReader reader) throws ParseException{
 		
-		List<PlayerMatch> matches = new ArrayList<PlayerMatch>();
-		
-		try(BufferedReader br = new BufferedReader(new FileReader(filePath))) 
-		{
-			//Leitura e interpretação do log
-		    String line = br.readLine();
+		List<PlayerMatch> matches = new ArrayList<PlayerMatch>();		
+
+		//Leitura e interpretação do log
+	    String line;
+	    
+		try {		
+			line = reader.readLine();
+				
 		    PlayerMatch currentMatch = null;
 		    
 		    while (line != null) {
@@ -40,7 +40,7 @@ public class LogParser {
 		    		if (splited[1].startsWith(initGameTag)){
 		    			currentMatch = new PlayerMatch(splited[0]);
 		    			
-		    			line = br.readLine();
+		    			line = reader.readLine();
 		    			
 		    			while (line != null) {
 		    				leftRemoved = line.replaceAll("^\\s+", "");
@@ -81,18 +81,16 @@ public class LogParser {
 				    			break;
 				    		}
 				    		
-				    		line = br.readLine();
+				    		line = reader.readLine();
 		    			}
 		    		}
 		    	}
 		    	
-		        line = br.readLine();
+		        line = reader.readLine();
 		    }
-		   	    
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+	    } 
+		catch (IOException e) {
+			throw new ParseException("", 0);
 		}
 		
 		return matches;
