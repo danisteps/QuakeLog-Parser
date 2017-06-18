@@ -11,9 +11,9 @@
 
 * To run the console you can either run the jar file or open the project using Eclipse or another IDE for Java.
 * In order to run the web page (index.html) properly, you'll need a local server or simply configure the following steps:
- * Open terminal (command line) and go to the index project folder
- * Run the command: python -m SimpleHTTPServer
- * Open the index through: http://localhost:8000
+# Open terminal (command line) and go to the index project folder
+# Run the command: python -m SimpleHTTPServer
+# Open the index through: http://localhost:8000
 
 ### Technologies used ###
 
