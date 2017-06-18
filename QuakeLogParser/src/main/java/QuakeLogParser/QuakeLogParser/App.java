@@ -64,24 +64,28 @@ public class App
     
     private void Import() throws IOException{
     	
-    	System.out.print("Entre o caminho do arquivo:");
     	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     	
-    	String filePath = br.readLine();
+    	String filePath = "";
+    	
+    	while (filePath == null || filePath.equals("")){    		
+    		System.out.println("Entre o caminho do arquivo:");
+    		filePath = br.readLine();
+    	}
     	
     	String error = controller.TryImportLog("/Users/danielesoarespassos/Documents/eclipse_workspace/QuakeLog/src/Console/game.txt");
     	
     	if (error != null)
-    		System.out.print("Erro: " + error);
+    		System.out.println("Erro: " + error);
     }
     
     private void ListMatches(){
     	String matches = controller.getAllMatchesInJSON();
-    	System.out.print(matches);
+    	System.out.println(matches);
     }
     
     private void ListRanking(){
     	String ranking = controller.getRankingInJSON();
-    	System.out.print(ranking);
+    	System.out.println(ranking);
     }
 }
