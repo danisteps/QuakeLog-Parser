@@ -1,8 +1,5 @@
 package Business;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +17,28 @@ public class AppController
 {
 	private IRespository repository;
 	private IOutputPersister persister;
+	private IParser parser;
+	private IValidator validator;
 	
 	public AppController(){
 		this.repository = RespositoryFactory.createPlayerMatchRepository(RespositoryType.Cache);
 		this.persister = new FilePersister();
+		this.parser = new LogParser();
+		this.validator = new FileValidator();
+	}
+	
+	public AppController(IRespository repository, IParser parser, IValidator validator){
+		this.repository = repository;
+		this.persister = new FilePersister();
+		this.parser = parser;
+		this.validator = validator;
+	}
+	
+	public AppController(IRespository repository, IOutputPersister persister, IParser parser, IValidator validator){
+		this.repository = repository;
+		this.persister = persister;
+		this.parser = parser;
+		this.validator = validator;
 	}
 	
 	/*
@@ -32,16 +47,13 @@ public class AppController
 	public String TryImportLog(String filePath){
 		
 		String error = null;
-		FileValidator validator = new FileValidator();
-		BufferedReader reader = validator.validateAndOpen(filePath);
+		BufferedReader reader = this.validator.validateAndOpen(filePath);
 		
 		if (reader != null){
-			LogParser parser = new LogParser();
-			
 	        try 
 	        {
 	        	//Converte para o tipo conhecido
-	        	List<PlayerMatch> matches = parser.Parse(filePath, reader);
+	        	List<PlayerMatch> matches = this.parser.Parse(filePath, reader);
 	        	
 	        	//Salva no repositório
 	        	repository.add(matches);

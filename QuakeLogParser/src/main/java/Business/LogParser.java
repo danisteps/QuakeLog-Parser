@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import Data.PlayerMatch;
 
-public class LogParser {
+public class LogParser implements IParser {
 	
 	private static String worldTag = "<world>";
 	private static String initGameTag = "InitGame";
