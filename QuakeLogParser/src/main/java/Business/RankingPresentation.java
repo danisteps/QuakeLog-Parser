@@ -13,35 +13,48 @@ import Data.Player;
 import Data.PlayerMatch;
 
 public class RankingPresentation {
-	private Map <String, Integer> sortedPlayers;
+	private Map <String, Integer> sortedPlayersByKills;
+	private Map <String, Integer> sortedPlayersByDeaths;
 	
-	public Map<String, Integer> getSortedPlayers() {
-		return sortedPlayers;
+	public Map<String, Integer> getSortedPlayersByKills() {
+		return sortedPlayersByKills;
+	}
+	
+	public Map<String, Integer> getSortedPlayersByDeaths() {
+		return sortedPlayersByDeaths;
 	}
 
 	public RankingPresentation(){
-		this.sortedPlayers = new HashMap<String, Integer>();
+		this.sortedPlayersByKills = new HashMap<String, Integer>();
+		this.sortedPlayersByDeaths = new HashMap<String, Integer>();
 	}
 	
 	public void build(List<PlayerMatch> matches){
 		
-		Map <String, Integer> players = new HashMap<String, Integer>();
+		Map <String, Integer> playersByKIlls = new HashMap<String, Integer>();
+		Map <String, Integer> playersByDeaths = new HashMap<String, Integer>();
 		
 		if (matches != null){
 			for(PlayerMatch match : matches){
 				Map<Player, Kill> playerInformation = match.getPlayerInformation();
 				for(Map.Entry<Player,Kill> entry : playerInformation.entrySet())
 				{
-					Integer previousCount = players.get(entry.getKey().getName());
+					Integer previousCountByKills = playersByKIlls.get(entry.getKey().getName());
+					Integer previousCountByDeaths = playersByDeaths.get(entry.getKey().getName());
 					
-					if (previousCount == null)
-						previousCount = 0;
+					if (previousCountByKills == null)
+						previousCountByKills = 0;
 					
-					players.put(entry.getKey().getName(), previousCount + entry.getValue().getKillsAndConsiderDeaths());					
+					if (previousCountByDeaths == null)
+						previousCountByDeaths = 0;
+					
+					playersByKIlls.put(entry.getKey().getName(), previousCountByKills + entry.getValue().getKillsAndConsiderDeaths());	
+					playersByDeaths.put(entry.getKey().getName(), previousCountByDeaths + entry.getValue().getDeathsByWorld());
 				}
 			}
 			
-			sortedPlayers = sortMapByValue(players);
+			sortedPlayersByKills = sortMapByValue(playersByKIlls);
+			sortedPlayersByDeaths = sortMapByValue(playersByDeaths);
 		}
 	}
 	

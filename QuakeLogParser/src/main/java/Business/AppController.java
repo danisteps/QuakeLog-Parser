@@ -129,16 +129,25 @@ public class AppController
 		String jsonInString = "Nenhum jogador foi cadastrado.";
 		
 		RankingPresentation present = getPlayerRaking();		
-		Map <String, Integer> ranking = present.getSortedPlayers();
+		Map <String, Integer> ranking = present.getSortedPlayersByKills();
+		Map <String, Integer> deathRanking = present.getSortedPlayersByDeaths();
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try 
     	{
-			//Converte para json
+			//Ranking de mortes
+			if (deathRanking != null && deathRanking.size() > 1){
+				//Converte para json
+    			jsonInString = mapper.writeValueAsString(deathRanking);
+    			this.persister.save("deathsRaking",jsonInString);
+    		}
+			
+			//Ranking oficial de kills
     		if (ranking != null && ranking.size() > 1){
+    			//Converte para json
     			jsonInString = mapper.writeValueAsString(ranking);
-    			this.persister.save(jsonInString);
+    			this.persister.save("killingRaking",jsonInString);
     		}
 		} 
     	catch (JsonProcessingException e)

@@ -1,5 +1,5 @@
 package Business;
 
 public interface IOutputPersister {
-	void save (String output);
+	void save (String fileName, String output);
 }

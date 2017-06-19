@@ -45,7 +45,7 @@ public class RankingPresentationTest extends TestCase {
     	
     	//Act
     	present.build(matches);
-    	Map<String,Integer> result = present.getSortedPlayers();
+    	Map<String,Integer> result = present.getSortedPlayersByKills();
     	
     	//Assert
         assertEquals("player1", result.entrySet().iterator().next().getKey());
@@ -71,7 +71,7 @@ public class RankingPresentationTest extends TestCase {
     	
     	//Act
     	present.build(matches);
-    	Map<String,Integer> result = present.getSortedPlayers();
+    	Map<String,Integer> result = present.getSortedPlayersByKills();
     	
     	//Assert
         assertEquals("player2", result.entrySet().iterator().next().getKey());

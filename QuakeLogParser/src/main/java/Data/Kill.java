@@ -40,4 +40,8 @@ public class Kill {
 	public int getKillsAndConsiderDeaths(){
 		return this.kills.size() - this.deathsByWorld.size();
 	}
+	
+	public int getDeathsByWorld(){
+		return deathsByWorld.size();
+	}
 }

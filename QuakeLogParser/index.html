@@ -14,7 +14,7 @@ var json = (function() {
         $.ajax({
             'async': false,
             'global': false,
-            'url': "output.json",
+            'url': "killingRaking.json",
             'dataType': "json",
             'success': function (data) {
                 json = data;
@@ -23,12 +23,37 @@ var json = (function() {
         return json;
     })();
 
-var out = '';
+var out = '<font size="4" color="red">Ranking by kills (Best players)<br /></font>';
+out += '<font size="3" color="red">Deaths were considered in this count as -1 kill<br /><br /></font>';
 console.log(json);
 var count = 1;
 
 for(var i in json) {
 	out += "#" + count + " - " + i + " - " + json[i] + " kills<br />";
+    count++;
+}
+
+var json2 = (function() {
+        var json2 = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "deathsRaking.json",
+            'dataType': "json",
+            'success': function (data) {
+                json2 = data;
+            }
+        });
+        return json2;
+    })();
+
+out += '<br /><font size="4" color="red">Ranking by deaths (Worst players)<br /></font>';
+out += '<font size="3" color="red">Only death count were considered for the calculus<br /><br /></font>';
+console.log(json2);
+count = 1;
+
+for(var i in json2) {
+    out += "#" + count + " - " + i + " - " + json2[i] + " deaths<br />";
     count++;
 }
 
