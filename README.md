@@ -33,7 +33,8 @@
 
 * Unit tests were developed to test the application because its fast and since the application is not complex it was enough.
 * To run the tests, open the project in a Java IDE (I used Eclipse)
-> On Eclipse, just right-click on the project folder and select Run As > JUnit Test
+> 1. On Eclipse: just right-click on the project folder and select Run As > JUnit Test;
+> 2. If you have Maven installed: just open the command line, go to the project folder (where the pom.xml file is located) and run "mvn test";
 
 ### Technologies used ###
 
