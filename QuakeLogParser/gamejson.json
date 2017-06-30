@@ -1,0 +1,7 @@
+[
+  {"eventName":"initgame", "meta": {"sv_floodProtect": "1", "time": "00:00" }},
+  {"eventName":"clienconnect", "meta": {"id": "2", "time": "15:00"}},
+  {"eventName":"clientuserinfochanged", "meta": { "id": "2", "username": "Isgalamido" , "time": "15:01"}},
+  {"eventName":"kill", "meta": { "user": "<world>", "player":"Isgalamido", "by":"MOD_TRIGGER_HURT", "time": "16:00"} },
+  {"eventName":"shutdowngame", "meta": {"time": "18:00" } }
+]

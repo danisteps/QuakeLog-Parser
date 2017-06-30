@@ -31,7 +31,7 @@ public class AppControllerTest extends TestCase {
      */
     public static Test suite()
     {
-        return new TestSuite( AppControllerTest.class );
+        return new TestSuite( AppControllerTest.class);
     }
     
     /**

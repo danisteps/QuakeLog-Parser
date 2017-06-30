@@ -11,7 +11,6 @@ import Data.PlayerMatch;
 
 public class LogParser implements IParser {
 	
-	private static String worldTag = "<world>";
 	private static String initGameTag = "InitGame";
 	private static String clientUserinfoChangedTag = "ClientUserinfoChanged";
 	private static String killTag = "Kill";
@@ -68,10 +67,7 @@ public class LogParser implements IParser {
 					    			String mean = m.group(6);
 					    			String deadPlayer = m.group(4);
 					    			
-					    			if (killer.equals(worldTag) || killer.equals(deadPlayer))
-					    				currentMatch.addDeath(deadPlayer, mean);
-					    			else
-					    				currentMatch.addKill(killer, mean);  
+					    			LogUtils.ResolveKill(currentMatch, killer, deadPlayer, mean);
 				    			}
 				    		}
 				    		//Caso que o jogo acaba

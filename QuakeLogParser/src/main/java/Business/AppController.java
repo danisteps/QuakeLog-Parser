@@ -19,12 +19,14 @@ public class AppController
 	private IOutputPersister persister;
 	private IParser parser;
 	private IValidator validator;
+	private Identifier identifier;
 	
 	public AppController(){
 		this.repository = RespositoryFactory.createPlayerMatchRepository(RespositoryType.Cache);
 		this.persister = new FilePersister();
 		this.parser = new LogParser();
 		this.validator = new FileValidator();
+		this.identifier = new Identifier();
 	}
 	
 	public AppController(IRespository repository, IParser parser, IValidator validator){
@@ -52,8 +54,12 @@ public class AppController
 		if (reader != null){
 	        try 
 	        {
-	        	//Converte para o tipo conhecido
-	        	List<PlayerMatch> matches = this.parser.Parse(filePath, reader);
+	        	List<PlayerMatch> matches;
+	        	
+	        	if (this.identifier.IsJson(filePath))
+	        		this.parser = new JSONParser();
+	        	
+	        	matches = this.parser.Parse(filePath, reader);
 	        	
 	        	//Salva no repositório
 	        	repository.add(matches);
