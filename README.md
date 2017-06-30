@@ -29,9 +29,17 @@
 * The console will outputs a file (output.json) that contains the ranking information when a log is imported.
 * After the log is imported, you can open the index.html
 
+### How do I run the tests ###
+
+* Unit tests were developed to test the application because its fast and since the application is not complex it was enough.
+* To run the tests, open the project in a Java IDE (I used Eclipse)
+> 1. On Eclipse: just right-click on the project folder and select Run As > JUnit Test;
+> 2. If you have Maven installed: just open the command line, go to the project folder (where the pom.xml file is located) and run "mvn test";
+
 ### Technologies used ###
 
 * The console was developed using Java
+* Unit testing was used to develop the tests
 * The web page was developed using HTML and JQuery
 
 ### Considerations ###
