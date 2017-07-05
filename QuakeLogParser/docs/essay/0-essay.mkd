@@ -1,0 +1,30 @@
+# Quake 3 reports
+
+## Task 1: describing the reports system
+
+Describe how you would implement a **command line tool** to read Quake 3 log files and generate reports. Describe the architecture, classes/modules and design decisions. There is no need to write the code, the answer should be in plain text and in english. Prefere paragraphs instead of bullet points.
+
+The system should be able to read a text file containing the games log of a Quake 3 server. The log aggregates information about kills,  deaths, suicides and player names ordered by time.
+
+### Use case 1: game summary
+
+As a Quake 3 server admin I'd like to feed a command line app with my server log and obtain a summary of all games present in the log file. Assuming each line of the log file contains one of the following informations:
+
+- A game start event 
+- A game end event
+- When an user kills another and the gun he used
+- When an user dies by himself and the cause of the death
+
+The command line application should output a summary with the following informations (for each game match):
+
+- player names
+- total number of kills
+- total kills by players
+
+### Use case 2: command line ranking
+
+As a Quake 3 server admin I'd like to feed a command line application with my server log and obtain a ranking of all players ordered by the number of kills of each player. The command line application should print the list of players with their kills.
+
+### Use case 3: web ranking
+
+As a Quake 3 server admin I'd like generate a web page with an user friendly output of command line rank command.
